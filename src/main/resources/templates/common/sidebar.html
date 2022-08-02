@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<aside id="sidebar" class="sidebar" th:fragment="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-heading">Pages</li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" th:href="@{/main/toMain}">
+                <i class="bi bi-person"></i>
+                <span>Main</span>
+            </a>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" th:href="@{/profile/toProfile}">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" th:href="@{/list/toList}">
+                <i class="bi bi-person"></i>
+                <span>Favourite</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" th:href="@{/create/toCreate}">
+                <i class="bi bi-person"></i>
+                <span>Create</span>
+            </a>
+        </li>
+
+    </ul>
+
+</aside><!-- End Sidebar-->
+</html>
