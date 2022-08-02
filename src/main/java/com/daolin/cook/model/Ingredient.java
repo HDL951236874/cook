@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "ingredient")
@@ -21,6 +23,16 @@ public class Ingredient {
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "ingredient_recipe",
+            joinColumns = @JoinColumn(name = "ingredient_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id")
+    )
+    private Set<Recipe> recipeList = new HashSet<>();
+
 
     public Integer getId() {
         return id;

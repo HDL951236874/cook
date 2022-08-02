@@ -42,9 +42,12 @@ public class Recipe implements Serializable {
     @Column(name = "image", columnDefinition = "MEDIUMBLOB")
     private String image;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "recipe_ingredient", referencedColumnName = "name")
-    private Set<Ingredient> ingredientList;
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "recipe_ingredient", referencedColumnName = "name")
+//    private Set<Ingredient> ingredientList;
+
+    @ManyToMany(mappedBy = "recipeList", fetch = FetchType.EAGER)
+    private Set<Ingredient> ingredientList = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
