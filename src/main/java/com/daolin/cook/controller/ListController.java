@@ -44,7 +44,7 @@ public class ListController {
         Set<CostumeList> costumeLists = user.getCostumeLists();
         List<CostumeList> costumeLists1 = new ArrayList<>(costumeLists);
         model.addAttribute("costumeList", costumeLists1);
-
+        model.addAttribute("formerPage","list");
         return "users-userList";
     }
 
@@ -61,7 +61,9 @@ public class ListController {
             }
         }
         model.addAttribute("recipes", recipeList);
+        List<User> following = new ArrayList<>(user.getFollowing());
         session.setAttribute("listName", name);
+        model.addAttribute("friendList",following);
         return "users-list";
     }
 
@@ -70,9 +72,7 @@ public class ListController {
         Recipe recipe = recipeService.getRecipeByName(name);
         String userName = (String) session.getAttribute("loginUser");
         recipeService.unmarkRecipeByUser(recipe, userName);
-        showList((String) session.getAttribute("listName"), session, model);
-        session.removeAttribute("listName");
-        return "users-list";
+        return showList((String) session.getAttribute("listName"), session, model);
     }
 
     @RequestMapping("/list/addList")

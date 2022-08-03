@@ -29,9 +29,9 @@ public class AddRecipe {
 
     @Test
     public void addAdmin() {
-        User user1 = new User(null, "admin", "123", null, null, null, null, null);
-        User user2 = new User(null, "ruihan", "123", null, null, null, null, null);
-        User user3 = new User(null, "daolin", "123", null, null, null, null, null);
+        User user1 = new User(null, "admin", "123", "admin@gmail.com", null, null, null, null, null, null, null);
+        User user2 = new User(null, "ruihan", "123", "ruihan@gmail.com", null, null, null, null, null, null, null);
+        User user3 = new User(null, "daolin", "123", "daolin@gmail.com", null, null, null, null, null, null, null);
 
         userService.saveUser(user1);
         userService.saveUser(user2);
@@ -41,18 +41,18 @@ public class AddRecipe {
     @Test
     public void addPreparedRecipeAndIngredient() {
         User admin = userService.getUserByName("admin");
-        Ingredient ingredient = new Ingredient(null, "potato", "potato",null);
-        Ingredient ingredient1 = new Ingredient(null, "apple", "apple",null);
-        Ingredient ingredient2 = new Ingredient(null, "banana", "banana",null);
-        Ingredient ingredient3 = new Ingredient(null, "peach", "peach",null);
+        Ingredient ingredient = new Ingredient(null, "potato", "potato", null);
+        Ingredient ingredient1 = new Ingredient(null, "apple", "apple", null);
+        Ingredient ingredient2 = new Ingredient(null, "banana", "banana", null);
+        Ingredient ingredient3 = new Ingredient(null, "peach", "peach", null);
         Set<Ingredient> recipe_set1 = Arrays.stream(new Ingredient[]{ingredient}).collect(Collectors.toSet());
         Set<Ingredient> recipe_set2 = Arrays.stream(new Ingredient[]{ingredient1}).collect(Collectors.toSet());
         Set<Ingredient> recipe_set3 = Arrays.stream(new Ingredient[]{ingredient2}).collect(Collectors.toSet());
         Set<Ingredient> recipe_set4 = Arrays.stream(new Ingredient[]{ingredient3}).collect(Collectors.toSet());
-        Recipe recipe = new Recipe(null, ingredient.getName() + " recipe", "This is the description for potato", null, null, null,null, recipe_set1, null, null, null);
-        Recipe recipe1 = new Recipe(null, ingredient1.getName() + " recipe", "This is the description for tomato", null, null, null,null, recipe_set2, null, null, null);
-        Recipe recipe2 = new Recipe(null, ingredient2.getName() + " recipe", "This is the description for apple", null, null, null,null, recipe_set3, null, null, null);
-        Recipe recipe3 = new Recipe(null, ingredient3.getName() + " recipe", "This is the description for peach", null, null, null,null, recipe_set4, null, null, null);
+        Recipe recipe = new Recipe(null, ingredient.getName() + " recipe", "This is the description for potato", null, null, null, null, recipe_set1, null, null, null);
+        Recipe recipe1 = new Recipe(null, ingredient1.getName() + " recipe", "This is the description for tomato", null, null, null, null, recipe_set2, null, null, null);
+        Recipe recipe2 = new Recipe(null, ingredient2.getName() + " recipe", "This is the description for apple", null, null, null, null, recipe_set3, null, null, null);
+        Recipe recipe3 = new Recipe(null, ingredient3.getName() + " recipe", "This is the description for peach", null, null, null, null, recipe_set4, null, null, null);
 
         ingredientService.addIngredientByUser(ingredient, "Admin");
         ingredientService.addIngredientByUser(ingredient1, "Admin");

@@ -23,4 +23,6 @@ public interface UserService {
 
     long getNum();
 
+    void addFriendByUser(String follower, String followee);
+
 }

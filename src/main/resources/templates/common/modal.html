@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="modal fade" th:fragment="sharemodal" id="createShareModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                    Modal
+                </h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                </button>
+            </div>
+            <div class="card top-selling overflow-auto">
+                <div class="card-body">
+                    <h5 class="card-title">Recipes Created By User <span>| Today</span>
+                    </h5>
+                    <style>
+                        div.dataTables_wrapper div.dataTables_length select {
+                            width: 100px;
+                        }
+                    </style>
+                    <table class="table datatable dataTable-table mydatatable"
+                           style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th scope="col" data-sortable="" style="width: 25.67595%;">
+                                Name
+                            </th>
+                            <th scope="col" data-sortable="" style="width: 25.67595%;">
+                                Email
+                            </th>
+                            <th scope="col" data-sortable="" style="width: 17.967%;"><a
+                                    href="#"
+                                    class="dataTable-sorter">Operation</a>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="friend:${friendList}">
+                            <td th:text="${friend.getName()}"></td>
+                            <td th:text="${friend.getName()}"></td>
+                            <td>
+                                <a th:href="@{/share/}+${friend.getName()}">
+                                    <button class="btn btn-primary">Share
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

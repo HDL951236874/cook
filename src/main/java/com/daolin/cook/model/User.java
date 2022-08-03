@@ -1,19 +1,21 @@
 package com.daolin.cook.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class User implements Serializable {
     @Id
     @Column(name = "id")
@@ -25,6 +27,9 @@ public class User implements Serializable {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "email")
+    private String email;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_recipe", referencedColumnName = "name")
@@ -44,6 +49,15 @@ public class User implements Serializable {
     @JoinColumn(name = "user_costumeList", referencedColumnName = "name")
     private Set<CostumeList> costumeLists;
 
+    @ManyToMany(mappedBy = "following", cascade = CascadeType.ALL)
+    private Set<User> followers = new HashSet<User>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "UserRel",
+            joinColumns = {@JoinColumn(name = "UserId")},
+            inverseJoinColumns = {@JoinColumn(name = "ParentId")})
+    private Set<User> following = new HashSet<User>();
+
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    @CollectionTable(name="user_list")
 //    @MapKeyColumn(name="propKey")
@@ -57,70 +71,5 @@ public class User implements Serializable {
 
     //    @ElementCollection(fetch = FetchType.EAGER)
 //    @CollectionTable(name = "user_to_listList",joinColumns = @JoinColumn(name = "user_id"))
-
-
-    public Set<Recipe> getRecipeMarkedList() {
-        return recipeMarkedList;
-    }
-
-    public void setRecipeMarkedList(Set<Recipe> recipeMarkedList) {
-        this.recipeMarkedList = recipeMarkedList;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Recipe> getRecipeList() {
-        return recipeList;
-    }
-
-    public void setRecipeList(Set<Recipe> recipeList) {
-        this.recipeList = recipeList;
-    }
-
-    public Set<Ingredient> getIngredientList() {
-        return ingredientList;
-    }
-
-    public void setIngredientList(Set<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<CostumeList> getCostumeLists() {
-        return costumeLists;
-    }
-
-    public void setCostumeLists(Set<CostumeList> costumeLists) {
-        this.costumeLists = costumeLists;
-    }
-
-    public Set<Recipe> getRatedList() {
-        return ratedList;
-    }
-
-    public void setRatedList(Set<Recipe> ratedList) {
-        this.ratedList = ratedList;
-    }
 
 }

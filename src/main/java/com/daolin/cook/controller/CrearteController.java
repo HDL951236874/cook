@@ -47,6 +47,9 @@ public class CrearteController {
         List<Ingredient> array2 = new ArrayList<>(ingredientList);
         model.addAttribute("create", array);
         model.addAttribute("create2", array2);
+        List<User> following = new ArrayList<>(user.getFollowing());
+        model.addAttribute("friendList", following);
+        session.setAttribute("formerPage", "create");
         return "users-create";
     }
 
@@ -61,7 +64,7 @@ public class CrearteController {
     public String addIngredient(@RequestParam("name2") String ingredientName,
                                 @RequestParam("description2") String ingredientDescription,
                                 @RequestParam("textarea2") String ingredientDetails, HttpSession session) {
-        Ingredient ingredient = new Ingredient(null, ingredientName, ingredientDescription + "\n" + ingredientDetails,null);
+        Ingredient ingredient = new Ingredient(null, ingredientName, ingredientDescription + "\n" + ingredientDetails, null);
         ingredientService.addIngredientByUser(ingredient, (String) session.getAttribute("loginUser"));
         return "redirect:/create/toCreate";
     }
@@ -88,7 +91,9 @@ public class CrearteController {
             }
             try {
                 recipe.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-            }catch (IOException e){e.printStackTrace();}
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         recipeService.addRecipeByUser(recipe, (String) session.getAttribute("loginUser"));
         return "redirect:/create/toCreate";

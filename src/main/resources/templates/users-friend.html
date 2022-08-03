@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -91,13 +91,10 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" data-sortable="" style="width: 25.67595%;"><a href="#"
-                                                                                                      class="dataTable-sorter">Picture</a>
-                                        </th>
-                                        <th scope="col" data-sortable="" style="width: 25.67595%;"><a href="#"
                                                                                                       class="dataTable-sorter">Name</a>
                                         </th>
                                         <th scope="col" data-sortable="" style="width: 17.967%;"><a href="#"
-                                                                                                    class="dataTable-sorter">Description</a>
+                                                                                                    class="dataTable-sorter">Email</a>
                                         </th>
                                         <th scope="col" data-sortable="" style="width: 17.967%;"><a href="#"
                                                                                                     class="dataTable-sorter">Operation</a>
@@ -106,25 +103,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="recipe:${create}">
-                                        <td><img alt="" th:src="*{'data:image/jpeg;base64,'+{recipe.getImage()}}"/></td>
-                                        <td>
-                                            <a th:text="${recipe.getName()}" href="#"
-                                               class="text-primary fw-bold"></a>
+                                    <tr th:each="user:${userList}">
+                                        <td th:text="${user.getName()}">
                                         </td>
-                                        <td>1</td>
+                                        <td th:text="${user.getEmail()}"></td>
                                         <td>
-                                            <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#editModal">Change
-                                            </button>
-                                            <a th:href="@{/create/deleteRecipe/}+${recipe.getName()}">
+                                            <a th:href="@{/friend/addfriend/}+${user.getName()}">
                                                 <button class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#editModal">Delete
+                                                        data-target="#editModal">Add
                                                 </button>
                                             </a>
-                                            <button class="btn btn-primary" th:onclick="shareModal([[${recipe.getName()}]])">Share
-                                            </button>
-
                                         </td>
                                     </tr>
                                     </tbody>
@@ -161,17 +149,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="ingredient:${create2}">
+                                <tr th:each="friend:${friendList}">
                                     <td>
-                                        <a th:text="${ingredient.getName()}" href="#"
+                                        <a th:text="${friend.getName()}" href="#"
                                            class="text-primary fw-bold"></a>
                                     </td>
-                                    <td>1</td>
+                                    <td th:text="${friend.getEmail()}">1</td>
                                     <td>
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                                data-target="#editModal">Change
-                                        </button>
-                                        <a th:href="@{/create/deleteIngredient/}+${ingredient.getName()}">
+                                        <a href="#">
                                             <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#editModal">Delete
                                             </button>
@@ -224,21 +209,8 @@
     $('.mydatatable').DataTable()
     $('.mydatatable2').DataTable()
 </script>
-<div th:replace="common/modal::sharemodal"></div>
 <script>
-    function shareModal(recipe) {
-        console.log(recipe)
-        $.ajax({
-            type: "post",
-            url: "/search/save",
-            dataType: "json",
-            data: {"name": recipe},
-            success: function (data) {
-                console.log(data);
-            }
-        })
-        $('#createShareModal').modal('show');
-    }
+
 </script>
 </body>
 

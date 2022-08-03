@@ -69,7 +69,7 @@ public class RecipeServiceImpl implements RecipeService {
         User user = userRepository.findByName(name);
         Set<Recipe> recipeList = user.getRecipeList();
         recipeList.add(recipe);
-
+        //here should be a relation between the ingredient amd the recipe.
         user.setRecipeList(recipeList);
 
         userRepository.save(user);

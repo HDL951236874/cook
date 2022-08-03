@@ -195,7 +195,7 @@
                         <thead>
                         <tr>
                             <th scope="col" data-sortable="" style="width: 25.67595%;">
-                                z
+                                Name
                             </th>
                             <th scope="col" data-sortable="" style="width: 17.967%;"><a
                                     href="#"
@@ -213,7 +213,6 @@
                                 </a>
                             </td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -235,8 +234,7 @@
                 THis is the information of the recipes
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
             </div>
         </div>
     </div>
@@ -251,6 +249,7 @@
                 data: {"name": recipeName},
                 success: function (data) {
                     var modalbody = $('#modalbody');
+                    modalbody.empty();
                     var ele1 = document.createElement("p");
                     var ele2 = document.createElement("p");
                     var ele3 = document.createElement("p");
@@ -270,7 +269,11 @@
             })
             $('#informationmodal').modal('show');
     }
+    function closeModal(){
+        $('#informationmodal').modal('hide');
+    }
 </script>
+
 </body>
 
 </html>

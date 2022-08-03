@@ -40,7 +40,6 @@ public class SearchController {
     @RequestMapping("/search/searchResult")
 //    @RequestMapping("/search/searchResult/{query}")
     public String search(@RequestParam("query") String query, Model model, HttpSession httpSession) {
-//        System.out.println(query);
         List<Recipe> allRecipes = recipeService.getAllRecipes();
         ArrayList<Recipe> recipeMatch = new ArrayList<>();
         for (Recipe recipe : allRecipes) {
@@ -81,15 +80,12 @@ public class SearchController {
 
     @RequestMapping("/search/mark/{name}")
     public String markToList(@PathVariable("name") String name, Model model, HttpSession session) {
-//        System.out.println(name);
         String keyword = (String) session.getAttribute("keyword");
-//        System.out.println(keyword);
         recipeService.markRecipeByUser((String) session.getAttribute("recipeSelected"),
                 (String) session.getAttribute("loginUser"),
                 name);
         session.removeAttribute("recipeSelected");
-        search(keyword, model, session);
-        return "users-search";
+        return search(keyword, model, session);
     }
 
     @RequestMapping("/search/save")
@@ -97,4 +93,5 @@ public class SearchController {
     public void saveRecipe(@RequestParam("name") String name, HttpSession session) {
         session.setAttribute("recipeSelected", name);
     }
+
 }

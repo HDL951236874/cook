@@ -56,4 +56,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.count();
     }
 
+
+    @Override
+    public void addFriendByUser(String follower, String followee) {
+        User followerUser = userRepository.findByName(follower);
+        User followeeUser = userRepository.findByName(followee);
+        Set<User> followers = followeeUser.getFollowers();
+        followers.add(followerUser);
+        Set<User> following = followerUser.getFollowing();
+        following.add(followeeUser);
+        userRepository.save(followeeUser);
+        userRepository.save(followerUser);
+    }
 }

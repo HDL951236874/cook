@@ -118,6 +118,9 @@
                                                         data-target="#editModal">Unmark
                                                 </button>
                                             </a>
+                                            <button class="btn btn-primary"
+                                                    th:onclick="shareModal([[${recipe.getName()}]])">Share
+                                            </button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -210,6 +213,23 @@
         $('#mytable').submit();
     }
 </script>
+<div th:replace="common/modal::sharemodal"></div>
+<script>
+    function shareModal(recipe) {
+        console.log(recipe)
+        $.ajax({
+            type: "post",
+            url: "/search/save",
+            dataType: "json",
+            data: {"name": recipe},
+            success: function (data) {
+                console.log(data);
+            }
+        })
+        $('#createShareModal').modal('show');
+    }
+</script>
+
 </body>
 
 </html>
