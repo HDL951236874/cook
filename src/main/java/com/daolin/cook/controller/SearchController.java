@@ -87,11 +87,4 @@ public class SearchController {
         session.removeAttribute("recipeSelected");
         return search(keyword, model, session);
     }
-
-    @RequestMapping("/search/save")
-    @ResponseBody
-    public void saveRecipe(@RequestParam("name") String name, HttpSession session) {
-        session.setAttribute("recipeSelected", name);
-    }
-
 }

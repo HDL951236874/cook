@@ -29,9 +29,9 @@ public class AddRecipe {
 
     @Test
     public void addAdmin() {
-        User user1 = new User(null, "admin", "123", "admin@gmail.com", null, null, null, null, null, null, null);
-        User user2 = new User(null, "ruihan", "123", "ruihan@gmail.com", null, null, null, null, null, null, null);
-        User user3 = new User(null, "daolin", "123", "daolin@gmail.com", null, null, null, null, null, null, null);
+        User user1 = new User(null, "admin", "123", "admin@gmail.com",  null,null, null, null, null, null, null, null);
+        User user2 = new User(null, "ruihan", "123", "ruihan@gmail.com",null, null, null, null, null, null, null, null);
+        User user3 = new User(null, "daolin", "123", "daolin@gmail.com",null, null, null, null, null, null, null, null);
 
         userService.saveUser(user1);
         userService.saveUser(user2);

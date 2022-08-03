@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Users / Profile - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link th:href="@{/img/favicon.png}" rel="icon">
+    <link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+    <!-- bootstrap table dependency-->
+    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/quill/quill.snow.css}" rel="stylesheet">
+    <link th:href="@{/vendor/quill/quill.bubble.css}" rel="stylesheet">
+    <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/vendor/simple-datatables/style.css}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-table.min.css}"/>
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin - v2.2.2
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<div th:replace="common/header::header"></div>
+<div th:replace="common/sidebar::sidebar"></div>
+<!-- ======= Sidebar ======= -->
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <style>
+        div.dataTables_wrapper div.dataTables_length select {
+            width: 100px;
+        }
+    </style>
+    <section class="section dashboard">
+        <div class="row">
+
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card top-selling overflow-auto">
+                            <div class="card-body">
+                                <h5 class="card-title">Top Selling <span>| Today</span></h5>
+
+                                <table class="table datatable dataTable-table mydatatable"
+                                       style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" data-sortable="" style="width: 15.67595%;"><a href="#"
+                                                                                                      class="dataTable-sorter">From</a>
+                                        </th>
+                                        <th scope="col" data-sortable="" style="width: 15.67595%;"><a href="#"
+                                                                                                      class="dataTable-sorter">Email</a>
+                                        </th>
+                                        <th scope="col" data-sortable="" style="width: 15.67595%;"><a href="#"
+                                                                                                      class="dataTable-sorter">operation</a>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="message:${messageList}">
+                                        <td th:text="${message.getName()}">
+                                        </td>
+                                        <td th:text="${message.getEmail()}"></td>
+                                        <td>
+<!--                                            we can use the id to get the message-->
+                                            <a th:href="@{/message/toDetail/}+${message.getId()}">
+                                                <button class="btn btn-primary">Detail
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- ======= Footer ======= -->
+<div th:replace="common/footer::footer"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/vendor/apexcharts/apexcharts.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/chart.js/chart.min.js}"></script>
+<script th:src="@{/vendor/echarts/echarts.min.js}"></script>
+<script th:src="@{/vendor/quill/quill.min.js}"></script>
+<script th:src="@{/vendor/simple-datatables/simple-datatables.js}"></script>
+<script th:src="@{/vendor/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/js/main.js}"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $('.mydatatable').DataTable();
+</script>
+</body>
+
+</html>

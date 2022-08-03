@@ -32,6 +32,10 @@ public class User implements Serializable {
     private String email;
 
     @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_message", referencedColumnName = "name")
+    private Set<Message> messageList;
+
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_recipe", referencedColumnName = "name")
     private Set<Recipe> recipeList;
 
