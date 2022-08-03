@@ -82,25 +82,29 @@
                                        style="width: 100%">
                                     <thead>
                                     <tr>
-                                        <th scope="col" data-sortable="" style="width: 25.67595%;"><a href="#"
+                                        <th scope="col" data-sortable="" style="width: 15.67595%;"><a href="#"
+                                                                                                      class="dataTable-sorter">picture</a>
+                                        </th>
+                                        <th scope="col" data-sortable="" style="width: 15.67595%;"><a href="#"
                                                                                                       class="dataTable-sorter">name</a>
                                         </th>
-                                        <th scope="col" data-sortable="" style="width: 25.67595%;"><a href="#"
+                                        <th scope="col" data-sortable="" style="width: 15.67595%;"><a href="#"
                                                                                                       class="dataTable-sorter">price</a>
                                         </th>
-                                        <th scope="col" data-sortable="" style="width: 25.67595%;"><a href="#"
+                                        <th scope="col" data-sortable="" style="width: 15.67595%;"><a href="#"
                                                                                                       class="dataTable-sorter">rate</a>
                                         </th>
-                                        <th scope="col" data-sortable="" style="width: 25.67595%;"><a href="#"
+                                        <th scope="col" data-sortable="" style="width: 15.67595%;"><a href="#"
                                                                                                       class="dataTable-sorter">Calories</a>
                                         </th>
-                                        <th scope="col" data-sortable="" style="width: 25.67595%;"><a href="#"
+                                        <th scope="col" data-sortable="" style="width: 15.67595%;"><a href="#"
                                                                                                       class="dataTable-sorter">operation</a>
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="recipe:${recipeMatch}">
+                                        <td><img alt="" th:src="*{'data:image/jpeg;base64,'+{recipe.getImage()}}"/></td>
                                         <td>
                                             <a th:text="${recipe.getName()}" href="#" th:onclick="informationModal([[${recipe.getName()}]])"
                                                class="text-primary fw-bold"></a>

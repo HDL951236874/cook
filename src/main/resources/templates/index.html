@@ -198,6 +198,7 @@
                                 <table class="table table-borderless">
                                     <thead>
                                     <tr>
+                                        <th scope="col">Picture</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Rate</th>
@@ -206,6 +207,7 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="recipe:${allRecipes}">
+                                        <td><img alt="" th:src="*{'data:image/jpeg;base64,'+{recipe.getImage()}}"/></td>
                                         <td><a th:text="${recipe.getName()}" href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas
                                             nulla</a></td>
                                         <td>$64</td>

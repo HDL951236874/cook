@@ -41,10 +41,10 @@ public class AddRecipe {
     @Test
     public void addPreparedRecipeAndIngredient() {
         User admin = userService.getUserByName("admin");
-        Ingredient ingredient = new Ingredient(null, "potato", "potato");
-        Ingredient ingredient1 = new Ingredient(null, "apple", "apple");
-        Ingredient ingredient2 = new Ingredient(null, "banana", "banana");
-        Ingredient ingredient3 = new Ingredient(null, "peach", "peach");
+        Ingredient ingredient = new Ingredient(null, "potato", "potato",null);
+        Ingredient ingredient1 = new Ingredient(null, "apple", "apple",null);
+        Ingredient ingredient2 = new Ingredient(null, "banana", "banana",null);
+        Ingredient ingredient3 = new Ingredient(null, "peach", "peach",null);
         Set<Ingredient> recipe_set1 = Arrays.stream(new Ingredient[]{ingredient}).collect(Collectors.toSet());
         Set<Ingredient> recipe_set2 = Arrays.stream(new Ingredient[]{ingredient1}).collect(Collectors.toSet());
         Set<Ingredient> recipe_set3 = Arrays.stream(new Ingredient[]{ingredient2}).collect(Collectors.toSet());

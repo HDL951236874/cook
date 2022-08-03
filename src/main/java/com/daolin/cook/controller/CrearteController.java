@@ -61,7 +61,7 @@ public class CrearteController {
     public String addIngredient(@RequestParam("name2") String ingredientName,
                                 @RequestParam("description2") String ingredientDescription,
                                 @RequestParam("textarea2") String ingredientDetails, HttpSession session) {
-        Ingredient ingredient = new Ingredient(null, ingredientName, ingredientDescription + "\n" + ingredientDetails);
+        Ingredient ingredient = new Ingredient(null, ingredientName, ingredientDescription + "\n" + ingredientDetails,null);
         ingredientService.addIngredientByUser(ingredient, (String) session.getAttribute("loginUser"));
         return "redirect:/create/toCreate";
     }

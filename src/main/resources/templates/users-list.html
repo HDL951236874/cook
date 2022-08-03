@@ -84,6 +84,10 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" data-sortable="" style="width: 25.67595%;"><a href="#"
+                                                                                                      class="dataTable-sorter">Picture</a>
+                                        </th>
+
+                                        <th scope="col" data-sortable="" style="width: 25.67595%;"><a href="#"
                                                                                                       class="dataTable-sorter">Name</a>
                                         </th>
                                         <th scope="col" data-sortable="" style="width: 17.967%;"><a href="#"
@@ -97,6 +101,7 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="recipe:${recipes}">
+                                        <td><img alt="" th:src="*{'data:image/jpeg;base64,'+{recipe.getImage()}}"/></td>
                                         <td>
                                             <a th:text="${recipe.getName()}" href="#"
                                                class="text-primary fw-bold"></a>
