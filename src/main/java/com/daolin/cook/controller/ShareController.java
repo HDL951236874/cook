@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import com.daolin.cook.controller.SearchController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,6 +37,23 @@ public class ShareController {
     @Autowired
     MessageService messageService;
 
+    @ResponseBody
+    @RequestMapping("/share/saveFriend")
+    public void saveFriend(@RequestParam("name") String name, HttpSession httpSession){
+        httpSession.setAttribute("friendName",name);
+    }
+
+    @RequestMapping("/shareMessage")
+    public String shareMessage(@RequestParam("name")String name,
+                             @RequestParam("description")String description,
+                             HttpSession httpSession){
+        String friendName = (String)httpSession.getAttribute("friendName");
+        String loginUser = (String)httpSession.getAttribute("loginUser");
+        User user = userService.getUserByName(loginUser);
+        messageService.sendMessageByUser(friendName, new Message(null, user.getName(), user.getEmail(), name, description));
+        return "redirect:/friend/tofriend";
+    }
+
     @RequestMapping("/share")
     public String shareRecipe(@RequestParam("name") String name,
                               @RequestParam("description") String description,
@@ -44,17 +62,6 @@ public class ShareController {
         String formerPage = (String) session.getAttribute("formerPage");
         String recipeName = (String) session.getAttribute("recipeSelected");
         String listName = (String) session.getAttribute("listName");
-        /*
-         * this part is for the message transfer operation
-         * This part will use the recipe name
-         *
-         * */
-//        session.removeAttribute("recipeSelected");
-        System.out.println("success into this part");
-        System.out.println(name);
-        System.out.println(description);
-        System.out.println(friendList);
-
         //this part is to build the message
         JSONArray jsonArray = new JSONArray(friendList);
         String loginUser = (String) session.getAttribute("loginUser");
@@ -66,7 +73,7 @@ public class ShareController {
             Message message = new Message(null, user.getName(), user.getEmail(), name, description, recipe);
             messageService.sendMessageByUser(userName,message);
         }
-
+        System.out.println(formerPage);
         if ("create".equals(formerPage)) {
             return "redirect:/create/toCreate";
         }

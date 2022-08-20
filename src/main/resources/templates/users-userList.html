@@ -53,13 +53,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Dashboard</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </nav>
+        <h1>Favourite</h1>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
@@ -71,7 +65,7 @@
                     <div class="col-12">
                         <div class="card top-selling overflow-auto">
                             <div class="card-body">
-                                <h5 class="card-title">Recipes Created By User <span>| Today</span>
+                                <h5 class="card-title">Favourite List <span>| Today</span>
                                     <div style="float:right">
                                         <a>
                                             <button class="btn btn btn-primary" style="line-height: 1.0;" data-toggle="modal" data-target="#exampleModal"> Add List
@@ -106,7 +100,7 @@
                                             <a th:text="${list.getName()}" href="#"
                                                class="text-primary fw-bold"></a>
                                         </td>
-                                        <td>1</td>
+                                        <td th:text="${list.getDescription()}"></td>
                                         <td>
                                             <a th:href="@{/list/deleteList/}+${list.getName()}"><button  class="btn btn-primary" data-toggle="modal"
                                                     data-target="#editModal">Delete

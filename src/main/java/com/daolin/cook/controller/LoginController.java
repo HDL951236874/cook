@@ -51,7 +51,8 @@ public class LoginController {
                 return "pages-register";
             }
         }
-        User user = new User(null, username, password, email, null,null, null, null, null, null, null, null);
+        User user = new User(null, username, password, email, null,null, null, null,
+                null, null, null, null);
         userService.saveUser(user);
         return "pages-login";
     }

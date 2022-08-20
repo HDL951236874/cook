@@ -106,10 +106,11 @@
                                     <tr th:each="recipe:${recipeMatch}">
                                         <td><img alt="" th:src="*{'data:image/jpeg;base64,'+{recipe.getImage()}}"/></td>
                                         <td>
-                                            <a th:text="${recipe.getName()}" href="#" th:onclick="informationModal([[${recipe.getName()}]])"
+                                            <a th:text="${recipe.getName()}" href="#"
+                                               th:onclick="informationModal([[${recipe.getName()}]])"
                                                class="text-primary fw-bold"></a>
                                         </td>
-                                        <td>Designer</td>
+                                        <td th:text="${recipe.getPrice()}"></td>
                                         <td th:text="${{recipe.getRate()}}"></td>
                                         <td>25</td>
                                         <td>
@@ -221,7 +222,8 @@
     </div>
 </div>
 <script>
-    $('.mydatatable').DataTable();
+    $('.mydatatable').DataTable({
+    });
 </script>
 <div class="modal fade" id="informationmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -234,7 +236,8 @@
                 THis is the information of the recipes
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close
+                </button>
             </div>
         </div>
     </div>
@@ -242,34 +245,35 @@
 <script>
     //this function is used to activative the information modal
     function informationModal(recipeName) {
-            $.ajax({
-                type: "post",
-                url: "/showdetails",
-                dataType: "json",
-                data: {"name": recipeName},
-                success: function (data) {
-                    var modalbody = $('#modalbody');
-                    modalbody.empty();
-                    var ele1 = document.createElement("p");
-                    var ele2 = document.createElement("p");
-                    var ele3 = document.createElement("p");
-                    var ele4 = document.createElement("p");
-                    var ele5 = document.createElement("p");
-                    ele1.innerText = "recipe name: " + data[0]['name'];
-                    ele2.innerText = "recipe rate: " + data[0]['rate'];
-                    ele3.innerText = "recipe price: "+ data[0]['price'];
-                    ele4.innerText = "recipe calories: "+ data[0]['calories'];
-                    ele5.innerText = "recipe descriptions: " + data[0]['description'];
-                    modalbody.append(ele1);
-                    modalbody.append(ele2);
-                    modalbody.append(ele3);
-                    modalbody.append(ele4);
-                    modalbody.append(ele5);
-                }
-            })
-            $('#informationmodal').modal('show');
+        $.ajax({
+            type: "post",
+            url: "/showdetails",
+            dataType: "json",
+            data: {"name": recipeName},
+            success: function (data) {
+                var modalbody = $('#modalbody');
+                modalbody.empty();
+                var ele1 = document.createElement("p");
+                var ele2 = document.createElement("p");
+                var ele3 = document.createElement("p");
+                var ele4 = document.createElement("p");
+                var ele5 = document.createElement("p");
+                ele1.innerText = "recipe name: " + data[0]['name'];
+                ele2.innerText = "recipe rate: " + data[0]['rate'];
+                ele3.innerText = "recipe price: " + data[0]['price'];
+                ele4.innerText = "recipe calories: " + data[0]['calories'];
+                ele5.innerText = "recipe descriptions: " + data[0]['description'];
+                modalbody.append(ele1);
+                modalbody.append(ele2);
+                modalbody.append(ele3);
+                modalbody.append(ele4);
+                modalbody.append(ele5);
+            }
+        })
+        $('#informationmodal').modal('show');
     }
-    function closeModal(){
+
+    function closeModal() {
         $('#informationmodal').modal('hide');
     }
 </script>

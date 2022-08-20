@@ -53,13 +53,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Dashboard</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </nav>
+        <h1>Created</h1>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
@@ -76,7 +70,7 @@
                                 <h5 class="card-title">Recipes Created By User <span>| Today</span>
                                     <div style="float:right">
                                         <a th:href="@{/create/toAddPage}">
-                                            <button class="btn btn btn-primary" style="line-height: 1.0;"> Add Recipe
+                                            <button class="btn btn btn-primary" style="line-height: 1.0;"> Add Recipe or Ingredient
                                             </button>
                                         </a>
                                     </div>
@@ -110,13 +104,14 @@
                                         <td><img alt="" th:src="*{'data:image/jpeg;base64,'+{recipe.getImage()}}"/></td>
                                         <td>
                                             <a th:text="${recipe.getName()}" href="#"
+                                               th:onclick="informationModal([[${recipe.getName()}]])"
                                                class="text-primary fw-bold"></a>
+
+<!--                                            <a th:text="${recipe.getName()}" href="#"-->
+<!--                                               class="text-primary fw-bold"></a>-->
                                         </td>
-                                        <td>1</td>
+                                        <td th:text="${recipe.getDescription()}">1</td>
                                         <td>
-                                            <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#editModal">Change
-                                            </button>
                                             <a th:href="@{/create/deleteRecipe/}+${recipe.getName()}">
                                                 <button class="btn btn-primary" data-toggle="modal"
                                                         data-target="#editModal">Delete
@@ -166,11 +161,8 @@
                                         <a th:text="${ingredient.getName()}" href="#"
                                            class="text-primary fw-bold"></a>
                                     </td>
-                                    <td>1</td>
+                                    <td th:text="${ingredient.getDescription()}"></td>
                                     <td>
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                                data-target="#editModal">Change
-                                        </button>
                                         <a th:href="@{/create/deleteIngredient/}+${ingredient.getName()}">
                                             <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#editModal">Delete
@@ -225,6 +217,23 @@
     $('.mydatatable2').DataTable()
 </script>
 <div th:replace="common/modal::sharemodal"></div>
+<div class="modal fade" id="informationmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Detail information</h5>
+            </div>
+            <div class="modal-body" id="modalbody">
+                THis is the information of the recipes
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     function shareModal(recipe) {
         console.log(recipe)
@@ -239,6 +248,39 @@
         })
         $('#createShareModal').modal('show');
     }
+
+    function informationModal(recipeName) {
+        $.ajax({
+            type: "post",
+            url: "/showdetails",
+            dataType: "json",
+            data: {"name": recipeName},
+            success: function (data) {
+                var modalbody = $('#modalbody');
+                modalbody.empty();
+                var ele1 = document.createElement("p");
+                var ele2 = document.createElement("p");
+                var ele3 = document.createElement("p");
+                var ele4 = document.createElement("p");
+                var ele5 = document.createElement("p");
+                ele1.innerText = "recipe name: " + data[0]['name'];
+                ele2.innerText = "recipe rate: " + data[0]['rate'];
+                ele3.innerText = "recipe price: " + data[0]['price'];
+                ele4.innerText = "recipe calories: " + data[0]['calories'];
+                ele5.innerText = "recipe descriptions: " + data[0]['description'];
+                modalbody.append(ele1);
+                modalbody.append(ele2);
+                modalbody.append(ele3);
+                modalbody.append(ele4);
+                modalbody.append(ele5);
+            }
+        })
+        $('#informationmodal').modal('show');
+    }
+    function closeModal() {
+        $('#informationmodal').modal('hide');
+    }
+
 </script>
 </body>
 

@@ -34,4 +34,12 @@ public class Message {
     @ManyToOne
     @JoinColumn(name = "recipe")
     private Recipe recipe;
+
+    public Message(Integer id, String name, String email, String title, String description) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.title = title;
+        this.description = description;
+    }
 }

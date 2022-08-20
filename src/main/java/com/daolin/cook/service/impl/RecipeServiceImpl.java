@@ -77,6 +77,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public void deleteRecipeByName(String name) {
+        Recipe recipe = recipeRepository.findByName(name);
+        Set<User> userListMarked = recipe.getUserListMarked();
+        for (User user : userListMarked) {
+            Set<Recipe> recipeMarkedList = user.getRecipeMarkedList();
+            recipeMarkedList.remove(recipe);
+            user.setRecipeMarkedList(recipeMarkedList);
+            userRepository.save(user);
+        }
         recipeRepository.deleteByName(name);
     }
 
@@ -107,25 +115,29 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public void rateRecipeByUser(String name, String recipeName, Integer score) {
+
+
         User user = userRepository.findByName(name);
         Recipe recipe = recipeRepository.findByName(recipeName);
 
         Set<Recipe> ratedList = user.getRatedList();
         Set<User> userRateList = recipe.getUserRateList();
 
-        if(!(ratedList.contains(recipe) ||userRateList.contains(user))){
+        if (!(ratedList.contains(recipe) || userRateList.contains(user))) {
             ratedList.add(recipe);
             userRateList.add(user);
+
+
+            user.setRatedList(ratedList);
+            recipe.setUserRateList(userRateList);
+
+            Double rate = recipe.getRate();
+            Double newRate = rate == null ? (score) / (recipe.getUserRateList().size()) : (score + rate) / (recipe.getUserRateList().size());
+            recipe.setRate(newRate);
+
+            recipeRepository.save(recipe);
+            userRepository.save(user);
         }
-
-        user.setRatedList(ratedList);
-        recipe.setUserRateList(userRateList);
-
-        Double rate = recipe.getRate();
-        Double newRate = rate==null?(score)/(recipe.getUserRateList().size()):(score+rate)/(recipe.getUserRateList().size());
-        recipe.setRate(newRate);
-
-        recipeRepository.save(recipe);
-        userRepository.save(user);
     }
 }
+

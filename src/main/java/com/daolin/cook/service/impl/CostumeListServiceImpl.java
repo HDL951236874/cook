@@ -58,7 +58,8 @@ public class CostumeListServiceImpl implements CostumeListService {
             user.setCostumeLists(costumeLists);
             userRepository.save(user);
 
-            costumeListRepository.delete(originalList);
         }
+        costumeListRepository.delete(originalList);
+
     }
 }

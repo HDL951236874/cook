@@ -85,9 +85,11 @@
                                 <p th:text="${message.getTitle()}"></p>
                                 <span class="badge bg-primary">Content</span>
                                 <p th:text="${message.getDescription()}"></p>
-                                <span class="badge bg-primary">Link</span>
-                                <a th:href="@{/message/search/}+${message.getRecipe().getName()}"><p th:text="${message.getRecipe().getName()}"></p></a>
-
+                                <div th:if="${message.getRecipe()} != null">
+                                    <span class="badge bg-primary">Link</span>
+                                    <a th:href="@{/message/search/}+${message.getRecipe().getName()}"><p
+                                            th:text="${message.getRecipe().getName()}"></p></a>
+                                </div>
                             </div>
                         </div>
                     </div>

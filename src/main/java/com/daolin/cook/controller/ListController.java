@@ -38,13 +38,15 @@ public class ListController {
     CostumeListService costumeListService;
 
     @RequestMapping("/list/toList")
-    public String toList(HttpSession httpSession, Model model) {
+    public String toList(HttpSession httpSession, Model model,HttpSession session) {
         String loginUser = (String) httpSession.getAttribute("loginUser");
         User user = userService.getUserByName(loginUser);
         Set<CostumeList> costumeLists = user.getCostumeLists();
         List<CostumeList> costumeLists1 = new ArrayList<>(costumeLists);
         model.addAttribute("costumeList", costumeLists1);
         model.addAttribute("formerPage","list");
+        session.setAttribute("formerPage", "create");
+
         return "users-userList";
     }
 
